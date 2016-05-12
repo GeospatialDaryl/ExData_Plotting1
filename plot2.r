@@ -10,7 +10,7 @@ pow$GAP <- as.numeric(as.character(pow$Global_active_power))
 
 pow$DTSTring <- paste(pow$Date, pow$Time)
 
-plot(pow$DT, pow$GAP, type = "l")
+plot(strptime(pow$DTSTring, format = "%d/%m/%Y %H:%M:%S"), pow$GAP, type = "l")
 png("plot2.png")
 
 par(mfrow = c(1,1))
