@@ -5,17 +5,25 @@ pow <- subset(household_power_consumption, Date == "2/1/2007" | Date == "2/2/200
 
 rm(household_power_consumption)
 
-pow$GAP <- as.numeric(as.character(pow$Global_active_power))
-
 pow$DTSTring <- paste(pow$Date, pow$Time)
 
 pow$DTf <- strptime(pow$DTSTring, format = "%m/%d/%Y %H:%M:%S")
+pow$GAP <- as.numeric(as.character(pow$Global_active_power))
+#plot(pow$)
+
+
+
+png("plot4.png")
+
+par(mfrow = c(2,2))
 
 plot(pow$DTf, pow$GAP, type = "l")
-png("plot2.png")
 
-par(mfrow = c(1,1))
+plot(pow$DTf, pow$Voltage, type = "l")
 
-plot(pow$DTf, pow$GAP, type = "l")
+plot(pow$DTf, pow$Sub_metering_3, type = "l", col = "blue")
+lines(pow$DTf, pow$Sub_metering_1, type = "l" )
+lines(pow$DTf, pow$Sub_metering_2, type = "l", col = "red")
 
+plot(pow$DTf, pow$Global_reactive_power, type = "l")
 dev.off()
